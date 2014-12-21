@@ -1,7 +1,8 @@
 extra_kwargs = {}
 try:
     from setuptools import setup
-    extra_kwargs['install_requires'] = ['rope >= 0.9.4', 'ropemode >= 0.2']
+    extra_kwargs['install_requires'] = ['rope_py3k >= 0.9.4']
+    extra_kwargs['dependency_links'] = ['http://github.com/atilaneves/ropemode/tarball/python3#egg=package-1.0']
 except ImportError:
     from distutils.core import setup
 
