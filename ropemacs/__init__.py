@@ -7,7 +7,7 @@ import ropemode.interface
 from Pymacs import lisp
 from rope.base import utils
 
-
+interactions = {}
 class LispUtils(ropemode.environment.Environment):
 
     def ask(self, prompt, default=None, starting=None):
@@ -335,10 +335,12 @@ the rope-marker-ring")
     def _set_interaction(self, callback, prefix):
         if hasattr(callback, 'im_func'):
             callback = callback.im_func
-        if prefix:
-            callback.interaction = 'P'
-        else:
-            callback.interaction = ''
+        txt_int = 'P' if prefix else ''
+        try:
+            callback.interaction = txt_int
+        except:
+            global interactions
+            interactions[callback] = txt_int
 
     def add_hook(self, name, callback, hook):
         mapping = {'before_save': 'before-save-hook',

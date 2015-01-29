@@ -1,8 +1,8 @@
 extra_kwargs = {}
 try:
     from setuptools import setup
-    extra_kwargs['install_requires'] = ['rope_py3k >= 0.9.4']
-    extra_kwargs['dependency_links'] = ['http://github.com/atilaneves/ropemode/tarball/python3#egg=package-1.0']
+    extra_kwargs['install_requires'] = ['rope_py3k >= 0.9.4',
+                                        'ropemode_py3k']
 except ImportError:
     from distutils.core import setup
 
@@ -31,10 +31,10 @@ setup(name='ropemacs',
       description='An emacs mode for using rope python refactoring library',
       long_description=get_long_description(),
       packages=['ropemacs'],
-      author='Ali Gholami Rudi',
-      author_email='aligrudi@users.sourceforge.net',
-      url='http://rope.sf.net/ropemacs.html',
+      author='Atila Neves',
+      author_email='atila.neves@gmail.com',
+      url='https://github.com/atilaneves/ropemacs',
       license='GNU GPL',
       classifiers=classifiers,
-      requires=['ropemode'],
+      requires=['ropemode_py3k'],
       **extra_kwargs)
