@@ -1,8 +1,16 @@
+This is a port of the original ropemacs for Python 3. The original README
+can be found below. If you haven't already installed Pymacs, do this::
 
-**Note:** *Please note that this project has been moved to* `GitHub python-rope / ropemacs`_
+  cd /tmp  # or the equivalent for Windows
+  git clone https://github.com/pinard/Pymacs.git
+  cd Pymacs
+  make install
 
-.. _GitHub python-rope / ropemacs: https://github.com/python-rope/ropemacs
+To install ropemacs_py3k, do this::
 
+  pip install ropemacs_py3k
+
+And then you should be good to go. Original README:
 
 =========================
  ropemacs, rope in emacs
