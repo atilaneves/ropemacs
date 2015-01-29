@@ -7,7 +7,19 @@ import ropemode.interface
 from Pymacs import lisp
 from rope.base import utils
 
+
+# This global dictionary is used by Pymacs to determine whether or not
+# a function in `(interactive)` in the Emacs Lisp sense. The keys
+# should be the function objects and the value should be non-None for
+# interactive functions. Since the interactive function can take a
+# paramater in Emacs (such as "P"), it can be used as the value in
+# this dictionary. In the Python2 version the interactions were set
+# in the function object directly as an attribute. For some reason
+# in Python3 some of the objects are bound methods, which can't have
+# attributes set to them, hence the global dict fallback.
 interactions = {}
+
+
 class LispUtils(ropemode.environment.Environment):
 
     def ask(self, prompt, default=None, starting=None):
@@ -335,12 +347,14 @@ the rope-marker-ring")
     def _set_interaction(self, callback, prefix):
         if hasattr(callback, 'im_func'):
             callback = callback.im_func
-        txt_int = 'P' if prefix else ''
+
+        interaction = 'P' if prefix else ''
+
         try:
-            callback.interaction = txt_int
-        except:
+            callback.interaction = interaction
+        except AttributeError:  # should only be for bound methods
             global interactions
-            interactions[callback] = txt_int
+            interactions[callback] = interaction
 
     def add_hook(self, name, callback, hook):
         mapping = {'before_save': 'before-save-hook',
